@@ -48,3 +48,23 @@ async function findOwners(pokemon:string){
     console.log(trainerNames);
     return trainerNames;
 }
+
+//Ex5
+async function findRoster(trainer:string){
+    const results = await sequelize.query(
+        `SELECT p.name
+        FROM pokemon p
+        JOIN pokemon_trainer pt ON p.pokemon_id = pt.pokemon_id
+        JOIN trainer tr ON tr.trainer_id = pt.trainer_id
+        WHERE tr.name = :trainer`,
+        {
+            replacements:{trainer},
+            type:QueryTypes.SELECT
+        }
+    )
+    const pokemonNames = results.map((res:any) => res.name);
+    console.log(pokemonNames);
+    return pokemonNames;
+}
+
+findRoster("Loga");
