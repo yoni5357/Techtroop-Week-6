@@ -13,3 +13,21 @@ async function getHeavyest() {
     console.log(heavyest.name);
     return heavyest.name;
 }
+
+//Ex3
+async function findByType(type:string){
+    const results = await sequelize.query(
+        `SELECT p.name
+        FROM pokemon p 
+        JOIN pokemon_type pt ON p.type_id = pt.type_id
+        WHERE pt.type_name = :type`,
+        {
+            replacements:{type:type},
+            type:QueryTypes.SELECT
+        }
+    )
+    const pokemonNames = results.map((res:any) => res.name);
+    console.log(pokemonNames);
+    return pokemonNames;
+}
+
