@@ -24,6 +24,9 @@ CREATE TABLE trainer (
     FOREIGN KEY (town_id) REFERENCES town(town_id)
 );
 
+DELETE FROM trainer;
+ALTER TABLE trainer AUTO_INCREMENT = 1;
+
 CREATE TABLE pokemon_trainer (
     pokemon_id INT,
     trainer_id INT,
