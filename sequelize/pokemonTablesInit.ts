@@ -93,7 +93,7 @@ async function insertPokemon(sequelize: Sequelize, pokemonList: pokemonJson[]) {
 
     await sequelize.query(
       `INSERT IGNORE INTO pokemon (pokemon_id,name,type_id,height,weight)
-		VALUES (:id, :name, :type_id, :height, :weight)`,
+		  VALUES (:id, :name, :type_id, :height, :weight)`,
       {
         replacements: {
           id: p.id,
