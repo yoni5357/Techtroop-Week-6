@@ -31,3 +31,20 @@ async function findByType(type:string){
     return pokemonNames;
 }
 
+//Ex4
+async function findOwners(pokemon:string){
+    const results = await sequelize.query(
+        `SELECT tr.name
+        FROM pokemon p
+        JOIN pokemon_trainer pt ON p.pokemon_id = pt.pokemon_id
+        JOIN trainer tr ON tr.trainer_id = pt.trainer_id
+        WHERE p.name = :pokemon`,
+        {
+            replacements:{pokemon},
+            type:QueryTypes.SELECT
+        }
+    )
+    const trainerNames = results.map((res:any) => res.name);
+    console.log(trainerNames);
+    return trainerNames;
+}
