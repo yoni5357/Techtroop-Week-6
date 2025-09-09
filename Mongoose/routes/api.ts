@@ -23,7 +23,16 @@ router.post('/person', (req:Request,res:Response) => {
 
 router.put('/person/:id', (req:Request, res:Response) => {
     const personId = req.params.id;
-    
+    Person.findByIdAndUpdate(personId, req.body)
+    .then(() => {
+        res.sendStatus(201);
+    })
+})
+
+router.delete('/apocalypse', (req:Request, res:Response) =>{
+    Person.deleteMany({}).then(()=>{
+        res.sendStatus(204)
+    });
 })
 
 export default router;
